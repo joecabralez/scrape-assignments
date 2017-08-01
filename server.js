@@ -34,7 +34,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Database configuration with mongoose
-mongoose.connect("");
+mongoose.connect("mongodb://heroku_6hb22wh0:920u54re8md3kfciiqm9ihm2ro@ds129003.mlab.com:29003/heroku_6hb22wh0");
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -70,7 +70,7 @@ app.get("/", function(req, res) {
 app.post("/scrape", function(req, res) {                   
     Articles.remove({},function() {
         // First, we grab the body of the html with request
-        request("http://www.adage.com/", function (error, response, html) {
+        request("https://www.adage.com/", function (error, response, html) {
             // Then, we load that into cheerio and save it to $ for a shorthand selector
             var $ = cheerio.load(html);
             // Next, grab every h2 within an article tag
