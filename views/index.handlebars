@@ -1,0 +1,15 @@
+<div class="jumbotron container">
+    <div class="text-center" style="color: white">
+        <h2>AdAge Scrapper</h2>
+    </div>
+</div>
+
+<div id="article_section">
+    {{#each articles }}
+    <div class="container panel panel-default" style="padding-top: 5px; padding-bottom: 5px">
+        <div class="col-xs-10">{{this.title}}</div>
+        <button class="col-xs-2 btn btn-primary save_article" title="{{this.title}}" link="{{this.link}}">Save Article</button>
+        <a class="col-xs-10">{{this.link}}</a>
+    </div>
+    {{/each}}
+</div>
