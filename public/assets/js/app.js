@@ -11,7 +11,7 @@ $(".save_article").on("click",function(){
     var this_article = {
         title: $(this).attr("title"),
         link: $(this).attr("link"),
-        author:$(this).attr(".byline")
+        author:$(this).attr("story-byline")
     };
     $.post("/save_article",this_article,function(data){
         alert("article saved: " + data.title)

@@ -67,23 +67,23 @@ app.get("/", function(req, res) {
 //======================================================
 
 // A GET request to scrape adage
-app.post("/scrape", function(req, res) {                   
+app.get("/scrape", function(req, res) {                   
     Articles.remove({},function() {
         // First, we grab the body of the html with request
-        request("https://www.adage.com/", function (error, response, html) {
+        request("http://www.adage.com/", function (error, response, html) {
             // Then, we load that into cheerio and save it to $ for a shorthand selector
             var $ = cheerio.load(html);
-            // Next, grab every h2 within an article tag
-            $("story-headline h2").each(function (i, element) {
+            // Next, grab every headline within an article tag
+            $("h2.story-headline").each(function (i, element) {
                 // Save an empty result object
                 var result = {};
                 // Add the text and href of every link, and save them as properties of the result object
-                result.title = $(this).children("a").text().trim();
-                result.link = $(this).children("a").attr("href");
-                result.author = $(this).children("story-byline").text();
+                result.title = $(element).text();
+                result.link = $(element).parent("a").attr("href");
+                result.author = $(element).children("story-byline").text();
                 // Using our Article model, create a new entry
                 // This passes the result object to the entry including the title and link
-                var entry = new Article(result);
+                var entry = new Articles(result);
                 // Now, save that entry to the db
                 entry.save(function (err, doc) {
                     // Log any errors
