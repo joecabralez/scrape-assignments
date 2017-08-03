@@ -68,7 +68,7 @@ app.get("/", function(req, res) {
 
 // A GET request to scrape adage
 app.get("/scrape", function(req, res) {                   
-    Articles.remove({},function() {
+    
         // First, we grab the body of the html with request
         request("http://www.adage.com/", function (error, response, html) {
             // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -98,7 +98,7 @@ app.get("/scrape", function(req, res) {
             });
             res.send("scraped articles");
         });
-    });
+    
 });
 
 

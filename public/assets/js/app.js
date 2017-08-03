@@ -1,5 +1,5 @@
 //Scrape adage
-$("#scrape_btn").on("click",function(){
+$(".scrape_btn").on("click",function(){
    $.post("/scrape",{},function(data){
        location.reload();
    })
